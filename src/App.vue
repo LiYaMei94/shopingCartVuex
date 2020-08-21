@@ -1,27 +1,38 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <router-view />
+    <CartPanel></CartPanel>
   </div>
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld.vue";
+import CartPanel from "./components/cartPanel";
 
 export default {
   name: "App",
   components: {
-    // HelloWorld,
+    CartPanel,
   },
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  width: 980px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.pop-cart {
+  float: right;
+}
+
+.title {
+  font-size: 20px;
+  color: #333;
+}
+
+.el-breadcrumb {
+  padding: 20px 0;
 }
 </style>
