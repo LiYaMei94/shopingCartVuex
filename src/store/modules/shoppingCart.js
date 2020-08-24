@@ -43,45 +43,25 @@ const actions = {
             context.state.products = data
         }
     },
-    addToCart(context, product) {
-        axios
-            .post("http://127.0.0.1:3000/addCartProducts", { product: product })
-            .then((res) => {
-                // console.log(res);
-                mutations.setCartProducts(context.state, res.data);
-            });
+    async addToCart(context, product) {
+        const { data } = await axios.post("http://127.0.0.1:3000/addCartProducts", { product: product });
+        mutations.setCartProducts(context.state, data);
     },
-    deleteFromCart(context, id) {
-        axios
-            .post("http://127.0.0.1:3000/deleteCartProducts", { id: id })
-            .then((res) => {
-                context.state.products.splice(res.data.index, 1)
-                // console.log(res);
-            });
+    async deleteFromCart(context, id) {
+        const { data } = await axios.post("http://127.0.0.1:3000/deleteCartProducts", { id: id });
+        context.state.products.splice(data.index, 1)
     },
-    updateCartProducts(context, params) {
-        axios
-            .post("http://127.0.0.1:3000/updateCartProducts", { ...params, type: 'count' })
-            .then((res) => {
-                context.state.products.splice(res.data.index, 1, res.data.data)
-                // console.log(res);
-            });
+    async updateCartProducts(context, params) {
+        const { data } = await axios.post("http://127.0.0.1:3000/updateCartProducts", { ...params, type: 'count' });
+        context.state.products.splice(data.index, 1, data.data)
     },
-    updateAllProductChecked(context, params) {
-        axios
-            .post("http://127.0.0.1:3000/updateCartProducts", { ...params, type: 'checked', isAllProduct: true })
-            .then((res) => {
-                context.state.products = res.data.data
-                // console.log(res);
-            });
+    async updateAllProductChecked(context, params) {
+        const { data } = await axios.post("http://127.0.0.1:3000/updateCartProducts", { ...params, type: 'checked', isAllProduct: true });
+        context.state.products = data.data
     },
-    updateProductChecked(context, params) {
-        axios
-            .post("http://127.0.0.1:3000/updateCartProducts", { ...params, type: 'checked', isAllProduct: false })
-            .then((res) => {
-                context.state.products.splice(res.data.index, 1, res.data.data)
-                // console.log(res);
-            });
+    async updateProductChecked(context, params) {
+        const { data } = await axios.post("http://127.0.0.1:3000/updateCartProducts", { ...params, type: 'checked', isAllProduct: false });
+        context.state.products.splice(data.index, 1, data.data)
     }
 }
 
