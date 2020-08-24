@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from "vuex";
-import axios from "axios";
+import { mapState, mapActions } from "vuex";
+// import axios from "axios";
 export default {
   name: "Product",
   data() {
@@ -30,15 +30,7 @@ export default {
   },
   methods: {
     ...mapActions("product", ["getProduct"]),
-    addToCart(item) {
-      axios
-        .post("http://127.0.0.1:3000/updateCartProducts", { product: item })
-        .then((res) => {
-          console.log(res);
-          this.setCartProducts(res.data);
-        });
-    },
-    ...mapMutations("shoppingCart", ["setCartProducts"]),
+    ...mapActions("shoppingCart", ["addToCart"]),
   },
   created() {
     //   获取商品列表

@@ -26,7 +26,7 @@
         <el-button
           size="mini"
           type="danger"
-          @click="$router.push({ name: 'cart' })"
+          @click="$router.push({ name: 'ShoppingCart' })"
           >去购物车</el-button
         >
       </div>
@@ -46,7 +46,7 @@ export default {
     ...mapGetters("shoppingCart", ["totalCount", "totalPrice"]),
   },
   methods: {
-    ...mapActions("shoppingCart", ["getCartProducts"]),
+    ...mapActions("shoppingCart", ["getCartProducts", "deleteFromCart"]),
   },
   created() {
     this.getCartProducts();
